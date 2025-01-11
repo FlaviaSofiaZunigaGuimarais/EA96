@@ -1,32 +1,29 @@
 #include <stdio.h>
-int main(void) {
+#include <string.h>
 
-    char cadena[100];
-    printf ("Introduce una cadena: ");
-    scanf("%s", cadena);
+void reverseString(char* original) {
+    int largo = strlen(original);
+    char* inicio = original;
 
-
-    void reverseString(char* original, char* reversed);
-    printf("La cadena invertida es: %s", cadena);
-    scanf("%s", cadena);
-
-    int largo, i;
-    char *inicio, *final, temp;
-
-    for (i = 0; i < largo - 1; i++)
-        final++;
-
-    for (i = 0; i < largo/2; i++)
-    {
+    while (inicio < final) {
         temp = *final;
         *final = *inicio;
         *inicio = temp;
 
         inicio++;
         final--;
-
     }
-    void getInput(char* phrase);
+}
+
+int main(void) {
+    char cadena[100];
+
+    printf("Introduce una cadena: ");
+    scanf("%99s", cadena);
+
+    reverseString(cadena);
+
+    printf("La cadena invertida es: %s\n", cadena);
 
     return 0;
 }
