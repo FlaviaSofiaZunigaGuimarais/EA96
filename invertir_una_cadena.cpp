@@ -15,6 +15,7 @@ void reverseString(char* original) {
     }
 }
 
+
 int main(void) {
     char cadena[100];
 
