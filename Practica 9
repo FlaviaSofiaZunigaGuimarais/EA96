@@ -1,0 +1,57 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'hourglassSum' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts 2D_INTEGER_ARRAY arr as parameter.
+     */
+
+    public static int hourglassSum(List<List<Integer>> arr) {//Declara una función que retorna un entero
+        int maxSum = Integer.MIN_VALUE;//Se declara un entero que almacenará la suma máxima
+
+        for (int i = 0; i <= 3; i++) {//Se inicializa un ciclo de tipo for que recorre las filas de la matriz, en donde se declara una variable de tipo entero llamada "i" y se le asigna 0 como valor, luego se pone una condición que indica que mientras i sea menor o igual a 3, se aumentará y se recorrerá la matriz hasta que se cumpla la condición.
+            for (int j = 0; j <= 3; j++) {//Se inicializa otro ciclo de tipo for, pero ahora con una variable de tipo entero llamada "j" que realiza la misma acción que el ciclo anterior, pero este a diferencia hará un recorrido por las columnas.
+                int currentSum = arr.get(i).get(j) + arr.get(i).get(j + 1) + arr.get(i).get(j + 2)
+                               + arr.get(i + 1).get(j + 1)
+                               + arr.get(i + 2).get(j) + arr.get(i + 2).get(j + 1) + arr.get(i + 2).get(j + 2); // Se calcula la suma de los valores del reloj de arena, en la parte superior se obtienen tres elementos, en el centro únicamente 2, y en la inferior se obtienen tres elementos.
+                maxSum = Math.max(maxSum, currentSum);//Compara la suma actual, con la suma mayor realizada hasta el momento
+            }
+        }
+        return maxSum;//Devuelkve la suma máxima.
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        List<List<Integer>> arr = new ArrayList<>();
+
+        IntStream.range(0, 6).forEach(i -> {
+            try {
+                arr.add(
+                    Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+                        .map(Integer::parseInt)
+                        .collect(toList())
+                );
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        int result = Result.hourglassSum(arr);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
